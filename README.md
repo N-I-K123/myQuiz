@@ -94,29 +94,3 @@ docker compose up -d
 Open your browser and navigate to the http://localhost:5173
 
 ---
-
-## 🏗️ Project Structure
-
-```
-myQuiz/
-├── client/                 # React 19 frontend
-│   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── pages/          # Full page views (CardView, Dashboard, etc.)
-│   │   ├── services/       # API communication (Axios)
-│   │   └── context/        # Global state (Auth)
-│   └── package.json
-│
-├── server/                 # Express 5 backend
-│   ├── api/                # Route controllers
-│   ├── prisma/             # Database schema (schema.prisma)
-│   ├── middleware/         # Auth & error handling
-│   ├── app.js              # Entry point
-│   └── database.sqlite     # Local DB file
-│
-└── README.md
-```
-
----
-
-*Built with ❤️ for better learning.*
