@@ -1,0 +1,58 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  username  String     @unique
+  password  String
+  role String @default("USER")
+  collections Collection[]
+}
+
+model Collection {
+  id Int @id @default(autoincrement())
+  name String
+  isPublic Boolean @default(false)
+  deadline DateTime?
+
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+
+  cards CollectionFlashCard[]
+}
+
+model FlashCard {
+  id       Int        @id @default(autoincrement())
+  question String
+  answer   String
+  difficulty Int 
+
+  inCollection CollectionFlashCard[]
+}
+
+model CollectionFlashCard {
+  id Int @id @default(autoincrement())
+  isLearned Boolean
+  priority  Int     @default(1)
+
+  collectionId Int
+  flashCardId Int
+
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  flashCard    FlashCard  @relation(fields: [flashCardId], references: [id], onDelete: Cascade)
+
+  @@unique([flashCardId, collectionId])
+}
+
+
+
+
+
+
